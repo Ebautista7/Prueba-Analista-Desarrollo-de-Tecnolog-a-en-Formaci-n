@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "043e93b2-5987-46ae-a2f0-c37295920dc9",
+		"name": "EndPoints de Prueba Tecnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41657580"
+	},
+	"item": [
+		{
+			"name": "Obtener Empleados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/expenses/getEmployes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"expenses",
+						"getEmployes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Total",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/expenses/totalExpenses",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"expenses",
+						"totalExpenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Total Por Empleado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/expenses/totalForEmployee",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"expenses",
+						"totalForEmployee"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

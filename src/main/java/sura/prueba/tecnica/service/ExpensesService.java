@@ -51,12 +51,24 @@ public class ExpensesService {
 
     public Double getTotalExpenses(){
         double total = 0;
-
         for (Employee employee : employees.values()) {
             for (Expense expense : employee.getExpenses()) {
                 total += expense.getTotal();
             }
         }
         return total;
+    }
+
+    public Map<Integer, Double> getTotalForEmployee(){
+        Map<Integer, Double> expensesMap = new HashMap<>();
+        double total = 0;
+        for (Employee employee : employees.values()) {
+            for (Expense expense : employee.getExpenses()) {
+                total += expense.getTotal();
+                expensesMap.put(employee.getId(), total);
+            }
+            total = 0;
+        }
+        return expensesMap;
     }
 }
