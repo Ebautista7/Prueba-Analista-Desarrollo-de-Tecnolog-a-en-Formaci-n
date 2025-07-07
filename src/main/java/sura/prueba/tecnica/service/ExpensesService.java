@@ -3,7 +3,9 @@ package sura.prueba.tecnica.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +23,6 @@ public class ExpensesService {
     }
 
     private void readDataEmployees(){
-        
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/data.csv")));
             String linea;
@@ -42,5 +43,20 @@ public class ExpensesService {
         } catch (Exception e) {
             throw new RuntimeException("Error leyendo los datos de los empleados");
         }
+    }
+
+    public List<Employee> getEmployees(){
+        return new ArrayList<Employee>(employees.values());
+    }
+
+    public Double getTotalExpenses(){
+        double total = 0;
+
+        for (Employee employee : employees.values()) {
+            for (Expense expense : employee.getExpenses()) {
+                total += expense.getTotal();
+            }
+        }
+        return total;
     }
 }
