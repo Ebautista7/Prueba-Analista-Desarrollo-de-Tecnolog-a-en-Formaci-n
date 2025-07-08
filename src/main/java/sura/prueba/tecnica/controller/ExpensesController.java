@@ -33,4 +33,8 @@ public class ExpensesController {
     public Map<Integer, Double> getTotalForEmployee(){
         return expensesService.getTotalForEmployee();
     }
+    @GetMapping("/reportExpenses")
+    public List<Map<String, Object>> monthlyReport(){
+        return expensesService.monthlyReport();
+    }
 }

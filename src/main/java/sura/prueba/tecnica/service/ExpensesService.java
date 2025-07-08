@@ -3,10 +3,14 @@ package sura.prueba.tecnica.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.stereotype.Service;
 
@@ -71,4 +75,40 @@ public class ExpensesService {
         }
         return expensesMap;
     }
+
+    public List<Map<String, Object>> monthlyReport(){
+        SimpleDateFormat dateEntry = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateMonth = new SimpleDateFormat("MM/yyyy");
+
+        List<Map<String, Object>> reporList = new ArrayList<>();
+
+        for (Employee employee : employees.values()) {
+            Map<String, Double> expenseForMonth = new HashMap<>();
+            for (Expense expense : employee.getExpenses()) {
+                String month;
+                try {
+                    month = dateMonth.format(dateEntry.parse(expense.getDate_expense()));
+                } catch (Exception e) {
+                    continue;
+                }
+                expenseForMonth.put(month, expenseForMonth.getOrDefault(month, 0.0) + expense.getTotal());
+            }
+            for (Map.Entry<String, Double> entry : expenseForMonth.entrySet()) {
+                String month = entry.getKey();
+                double totalMonth = entry.getValue();
+                double totalWithIVA = (totalMonth * 0.19) + totalMonth;
+                String assumeer = totalWithIVA > 1000000 ? "SURA": "Empleado";
+                Map<String, Object> data = new HashMap<>();
+                data.put("id", employee.getId());
+                data.put("nombre", employee.getName());
+                data.put("month", month);
+                data.put("totalMonth", totalMonth);
+                data.put("totalWithIVA", totalWithIVA);
+                data.put("asumido por", assumeer);
+                reporList.add(data);
+            }
+        }
+        return reporList;
+    }
+
 }
