@@ -21,14 +21,14 @@ Este proyecto permite analizar los gastos de empleados.
 ### Pasos
 - Si deseas hacerlo por consola debes seguir estos paso:
 
-Clonar el repositorio con 
-git clone https://github.com/Ebautista7/Prueba-Analista-Desarrollo-de-Tecnolog-a-en-Formaci-n.git
+Clonar el repositorio con: 
+- git clone https://github.com/Ebautista7/Prueba-Analista-Desarrollo-de-Tecnolog-a-en-Formaci-n.git
 
 Ingresar al repo
-cd Prueba-Analista-Desarrollo-de-Tecnolog-a-en-Formaci-n
+- cd Prueba-Analista-Desarrollo-de-Tecnolog-a-en-Formaci-n
 
 Ejecutar el proyecto
-.\mvnw spring-boot:run
+- .\mvnw spring-boot:run
 
 puedes probar desde el navegador o un cliente que permita lanzar las peticiones los endpoints disponibles son:
 localhost:8080/api/expenses/reportExpenses
