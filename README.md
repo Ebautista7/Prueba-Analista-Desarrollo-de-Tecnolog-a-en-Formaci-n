@@ -40,3 +40,5 @@ puedes probar desde el navegador o un cliente que permita lanzar las peticiones 
 
 ## Observaciones
 En la raiz hay un archivo llamado EndPoints de Prueba Tecnica.postman_collection.json que es una coleccion de postman la cual luego de ejecutado tambien puedes usar para probar
+
+El proyecto cuenta con un archivo llamado "ExpensesServiceTest" que se encuentra en la ruta src/test/java/sura/prueba/tecnica que contiene las pruebas unitarias usadas, en caso de querer verlas puede ejecutar dicho archivo
