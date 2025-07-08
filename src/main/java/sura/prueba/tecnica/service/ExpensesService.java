@@ -1,17 +1,17 @@
 package sura.prueba.tecnica.service;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -23,6 +23,7 @@ import sura.prueba.tecnica.model.Expense;
 public class ExpensesService {
     
     private Map<Integer, Employee> employees = new HashMap<>();
+    private static final double PERCENT_IVA = 0.19;
 
     public ExpensesService(){
         readDataEmployees();
@@ -79,8 +80,8 @@ public class ExpensesService {
     }
 
     public List<Map<String, Object>> monthlyReport(){
-        SimpleDateFormat dateEntry = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat dateMonth = new SimpleDateFormat("MM/yyyy");
+        DateTimeFormatter dateEntry = DateTimeFormatter.ofPattern("d/M/yy");
+        Locale locale = Locale.forLanguageTag("es-CO");
 
         List<Map<String, Object>> reporList = new ArrayList<>();
 
@@ -89,31 +90,37 @@ public class ExpensesService {
             for (Expense expense : employee.getExpenses()) {
                 String month;
                 try {
-                    month = dateMonth.format(dateEntry.parse(expense.getDate_expense()));
+                    LocalDate dateMonth = LocalDate.parse(expense.getDate_expense(), dateEntry);
+                    String monthText = dateMonth.getMonth().getDisplayName(TextStyle.FULL, locale);
+                    month = monthText + "/" + dateMonth.getYear();
                 } catch (Exception e) {
                     continue;
                 }
                 expenseForMonth.put(month, expenseForMonth.getOrDefault(month, 0.0) + expense.getTotal());
             }
             for (Map.Entry<String, Double> entry : expenseForMonth.entrySet()) {
-                String month = entry.getKey();
-                double totalMonth = entry.getValue();
-                double totalWithIVA = (totalMonth * 0.19) + totalMonth;
-                String assumeer = totalWithIVA > 1000000 ? "SURA": "Empleado";
-                Map<String, Object> data = new HashMap<>();
-                data.put("id", employee.getId());
-                data.put("nombre", employee.getName());
-                data.put("month", month);
-                data.put("totalMonth", totalMonth);
-                data.put("totalWithIVA", totalWithIVA);
-                data.put("asumido por", assumeer);
-                reporList.add(data);
+                reporList.add(datForMontlyReport(entry, expenseForMonth, employee));
             }
         }
         
         reporList.sort(Comparator.comparing(data -> (String) data.get("nombre"),Comparator.nullsLast(String::compareToIgnoreCase)));
 
         return reporList;
+    }
+
+    private Map<String, Object> datForMontlyReport(Map.Entry<String, Double> entry, Map<String, Double> expenseForMonth, Employee employee){
+        String month = entry.getKey();
+        double totalMonth = entry.getValue();
+        double totalWithIVA = (totalMonth * PERCENT_IVA) + totalMonth;
+        String assumeer = totalWithIVA > 1000000 ? "SURA": "Empleado";
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", employee.getId());
+        data.put("nombre", employee.getName());
+        data.put("month", month);
+        data.put("totalMonth", totalMonth);
+        data.put("totalWithIVA", totalWithIVA);
+        data.put("asumido por", assumeer);
+        return data;
     }
 
 }
