@@ -7,10 +7,12 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -50,7 +52,7 @@ public class ExpensesService {
     }
 
     public List<Employee> getEmployees(){
-        return new ArrayList<Employee>(employees.values());
+        return new ArrayList<Employee>(employees.values().stream().sorted(Comparator.comparing(Employee::getName)).collect(Collectors.toList()));
     }
 
     public Double getTotalExpenses(){
@@ -108,6 +110,9 @@ public class ExpensesService {
                 reporList.add(data);
             }
         }
+        
+        reporList.sort(Comparator.comparing(data -> (String) data.get("nombre"),Comparator.nullsLast(String::compareToIgnoreCase)));
+
         return reporList;
     }
 
