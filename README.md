@@ -19,7 +19,7 @@ Este proyecto permite analizar los gastos de empleados.
     - Conexion a internet para descargar las dependencias por primera vez
     - Git
 ### Pasos
-- Si deseas hacerlo por consola debes seguir estos paso:
+Si deseas hacerlo por consola debes seguir estos paso:
 
 Clonar el repositorio con: 
 - git clone https://github.com/Ebautista7/Prueba-Analista-Desarrollo-de-Tecnolog-a-en-Formaci-n.git
@@ -31,10 +31,10 @@ Ejecutar el proyecto
 - .\mvnw spring-boot:run
 
 puedes probar desde el navegador o un cliente que permita lanzar las peticiones los endpoints disponibles son:
-localhost:8080/api/expenses/reportExpenses
-localhost:8080/api/expenses/totalForEmployee
-localhost:8080/api/expenses/totalExpenses
-localhost:8080/api/expenses/getEmployes
+    - localhost:8080/api/expenses/reportExpenses
+    - localhost:8080/api/expenses/totalForEmployee
+    - localhost:8080/api/expenses/totalExpenses
+    - localhost:8080/api/expenses/getEmployes
 
 - Si deseas clonar el repo y abrirlo desde un IDE debes buscar en la ruta src/main el archivo TecnicaApplication.java y ejecutarlo
 
