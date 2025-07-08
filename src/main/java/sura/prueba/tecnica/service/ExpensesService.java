@@ -1,6 +1,5 @@
 package sura.prueba.tecnica.service;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -37,7 +36,7 @@ public class ExpensesService {
         return new ArrayList<Employee>(employees.values().stream().sorted(Comparator.comparing(Employee::getName)).collect(Collectors.toList()));
     }
 
-    public Double getTotalExpenses(){
+    public double getTotalExpenses(){
         double total = 0;
         for (Employee employee : employees.values()) {
             for (Expense expense : employee.getExpenses()) {
@@ -96,7 +95,7 @@ public class ExpensesService {
         String assumeer = totalWithIVA > 1000000 ? "SURA": "Empleado";
         Map<String, Object> data = new HashMap<>();
         data.put("id", employee.getId());
-        data.put("nombre", employee.getName());
+        data.put("name", employee.getName());
         data.put("month", month);
         data.put("totalMonth", totalMonth);
         data.put("totalWithIVA", totalWithIVA);
