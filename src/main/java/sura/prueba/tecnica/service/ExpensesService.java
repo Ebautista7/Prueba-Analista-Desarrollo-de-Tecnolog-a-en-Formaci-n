@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import sura.prueba.tecnica.model.Employee;
 import sura.prueba.tecnica.model.Expense;
+import sura.prueba.tecnica.model.TotalEmployeeDTO;
 import sura.prueba.tecnica.repository.EmployeeRepository;
 
 @Service
@@ -46,17 +47,18 @@ public class ExpensesService {
         return total;
     }
 
-    public Map<Integer, Double> getTotalForEmployee(){
-        Map<Integer, Double> expensesMap = new HashMap<>();
+    public List<TotalEmployeeDTO> getTotalForEmployee(){
+        List<TotalEmployeeDTO> expensesMap = new ArrayList<>();
         double total = 0;
         for (Employee employee : employees.values()) {
             for (Expense expense : employee.getExpenses()) {
                 total += expense.getTotal();
-                expensesMap.put(employee.getId(), total);
+                
             }
+            expensesMap.add(new TotalEmployeeDTO(employee.getId(),employee.getName(), total));
             total = 0;
         }
-        return expensesMap;
+        return expensesMap.stream().sorted(Comparator.comparing(TotalEmployeeDTO::getName)).toList();
     }
 
     public List<Map<String, Object>> monthlyReport(){

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import sura.prueba.tecnica.model.Employee;
+import sura.prueba.tecnica.model.TotalEmployeeDTO;
 import sura.prueba.tecnica.service.ExpensesService;
 
 @RestController
@@ -29,7 +30,7 @@ public class ExpensesController {
     }
 
     @GetMapping("/totalForEmployee")
-    public Map<Integer, Double> getTotalForEmployee(){
+    public List<TotalEmployeeDTO> getTotalForEmployee(){
         return expensesService.getTotalForEmployee();
     }
     @GetMapping("/reportExpenses")
