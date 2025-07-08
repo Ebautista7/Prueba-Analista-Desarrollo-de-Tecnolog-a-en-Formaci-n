@@ -17,14 +17,21 @@ public class EmployeeRepository {
 
     public Map<Integer, Employee> readDataEmployees(){
         Map<Integer, Employee> employees = new HashMap<>();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(path_csv)));
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(path_csv)))){
             String linea;
+            
             br.readLine();
+            int row = 1;
 
             while ((linea = br.readLine()) != null) {
+                row++;
                 if (linea.trim().isEmpty()) continue; 
                 String[] fields = linea.split(",");
+
+                if (fields.length < 4) {
+                    throw new IllegalArgumentException("Fila " + row + " Incompleta");
+                }
+
                 int id = Integer.parseInt(fields[0]);
                 String name = fields[1];
                 String date_expense = fields[2];
@@ -35,7 +42,7 @@ public class EmployeeRepository {
                 employees.computeIfAbsent(id, e -> new Employee(id, name)).addExpense(newExpense);
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error leyendo los datos de los empleados");
+            throw new RuntimeException("Error leyendo los datos de los empleados: " + e.getMessage());
         }
         return employees;
     }
