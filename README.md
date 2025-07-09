@@ -31,10 +31,10 @@ Ejecutar el proyecto
 - .\mvnw spring-boot:run
 
 puedes probar desde el navegador o un cliente que permita lanzar las peticiones los endpoints disponibles son:
-- localhost:8080/api/expenses/reportExpenses
-- localhost:8080/api/expenses/totalForEmployee
-- localhost:8080/api/expenses/totalExpenses
-- localhost:8080/api/expenses/getEmployes
+- localhost:8080/api/expenses/reportExpenses (Servicio principal, retorna la lista de empleados con sus gastos por mes con el calculo del IVA y quien debe asumir dicho gasto)
+- localhost:8080/api/expenses/totalForEmployee (Servicio que retorna una lista del total de gastos de cada empleado en todos los meses)
+- localhost:8080/api/expenses/totalExpenses (Servicio que retorna el Total de gastos- suma de todos los gastos)
+- localhost:8080/api/expenses/getEmployes (Servicio que retorna todos los empleados con sus gastos respectivos)
 
 - Si deseas clonar el repo y abrirlo desde un IDE debes buscar en la ruta src/main el archivo TecnicaApplication.java y ejecutarlo
 
