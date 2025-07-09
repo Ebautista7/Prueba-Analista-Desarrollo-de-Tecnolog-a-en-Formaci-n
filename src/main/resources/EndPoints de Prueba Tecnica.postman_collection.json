@@ -7,6 +7,26 @@
 	},
 	"item": [
 		{
+			"name": "Reporte de Gastos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/expenses/reportExpenses",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"expenses",
+						"reportExpenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtener Empleados",
 			"request": {
 				"method": "GET",
@@ -61,26 +81,6 @@
 						"api",
 						"expenses",
 						"totalForEmployee"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Reporte de Gastos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/api/expenses/reportExpenses",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"expenses",
-						"reportExpenses"
 					]
 				}
 			},

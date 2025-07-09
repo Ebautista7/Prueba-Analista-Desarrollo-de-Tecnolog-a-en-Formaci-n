@@ -85,7 +85,7 @@ public class ExpensesService {
             }
         }
         
-        reporList.sort(Comparator.comparing(data -> (String) data.get("nombre"),Comparator.nullsLast(String::compareToIgnoreCase)));
+        reporList.sort(Comparator.comparing(data -> (String) data.get("name"),Comparator.nullsLast(String::compareToIgnoreCase)));
 
         return reporList;
     }

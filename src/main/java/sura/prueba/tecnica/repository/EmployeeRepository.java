@@ -1,6 +1,7 @@
 package sura.prueba.tecnica.repository;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,13 @@ public class EmployeeRepository {
 
     public Map<Integer, Employee> readDataEmployees(){
         Map<Integer, Employee> employees = new HashMap<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(path_csv)))){
+        try {
+            InputStream input = getClass().getResourceAsStream(path_csv);
+            if(input == null){
+                System.out.println("Entra");
+                throw new IllegalArgumentException("El archivo no se encuentra en Resources");
+            }
+            BufferedReader br = new BufferedReader(new InputStreamReader(input));
             String linea;
             
             br.readLine();
